@@ -33,17 +33,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/weight', weightRouter);
 
-// Okay, so disclaimer first.
-// there's so many issues with separating routing files
-// with socket.io features in it, so just make it one file only for now.
-// app.post('/weight/data', (req, res) => {
-//   const sensorValue = req.body.sensor_value;
-//   console.log(`\nReceived sensor value: ${sensorValue}`);
-//   io.emit('monitoring', { value: 10 })
-//
-//   res.status(200).send({ sensor_value: sensorValue });
-// });
-
 // ----------------- just act like this is the end of file -----------------
 
 // catch 404 and forward to error handler
@@ -62,6 +51,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// listen to the port 8080 
+// and you should check the ./bin/www file
+// it listens to port 3000 as well cause we dont have .env file :)
 server.listen(8080, () => console.log(`Server started!`));
 
 module.exports = app;
