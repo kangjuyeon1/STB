@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>monitoring</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="javascripts/monitoring.js" defer></script> 
+</head>
+<body>
+    <div class="container">
+            <div class = "cloud">
+                <div class="content">
+                    <p class="date" style="margin: 0px;"></p>
+                    <p class = "time"></p>
+                 </div>
+            </div>
+
+        <div class="monitoring">
+                <!-- TODO: REALTIME SOCKET -->
+            <div class="box_1">
+                <div class="percent"></div>
+            </div>
+            <div class="box_2">
+                <div class="percent"></div>
+            </div>
+            <div class="box_3">
+                <div class="percent"></div>
+            </div>
+            
+            <div class="trashname">
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="navigateToPlogging() "ontouchend="navigateToPlogging()"start style="font-size: 30px;">Start</button>
+
+    </div>
+
+</body>
+</html>

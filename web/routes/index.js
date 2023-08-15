@@ -6,6 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/monitoring', function(req, res, next) {
+  res.render('monitoring');
+});
+
 router.get('/checkapi', function(req, res, next) {
   res.json({ user: 'tj' });
 });

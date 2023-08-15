@@ -12,7 +12,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,6 +23,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/weight', weightRouter);
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', () => { /* … */ });
+server.listen(8080);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,10 +44,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-io.on('connection', () => { /* … */ });
-server.listen(8080);
 
 module.exports = app;
