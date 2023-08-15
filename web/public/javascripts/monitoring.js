@@ -1,3 +1,9 @@
+var socket = io();
+socket.on("monitoring", (v) => {
+  console.log(v.value)
+  adjustSpecificBoxHeight(".box_1", v.value)
+});
+
 function updateTime() {
   const now = new Date();
   const dateElement = document.querySelector(".date");
@@ -31,7 +37,8 @@ function getRandomPercent() {
 }
 
 function adjustBoxHeight() {
-  const boxes = document.querySelectorAll(".box_1, .box_2, .box_3");
+  // const boxes = document.querySelectorAll(".box_1, .box_2, .box_3");
+  const boxes = document.querySelectorAll(".box_2, .box_3");
 
   boxes.forEach(function(box) {
     const percentElement = box.querySelector(".percent");
@@ -44,6 +51,19 @@ function adjustBoxHeight() {
     const calculatedHeight = (percentValue / 100) * (maxHeight - minHeight) + minHeight;
     box.style.height = calculatedHeight + "px";
   });
+}
+
+function adjustSpecificBoxHeight(name, percentage) {
+  const box = document.querySelector(name);
+
+  const percentElement = box.querySelector(".percent");
+  percentElement.textContent = percentage + "%";
+  const percentValue = percentage;
+  const maxHeight = 200;
+  const minHeight = 50;
+
+  const calculatedHeight = (percentValue / 100) * (maxHeight - minHeight) + minHeight;
+  box.style.height = calculatedHeight + "px";
 }
 
 document.addEventListener("DOMContentLoaded", function() {

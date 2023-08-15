@@ -1,10 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
 
-// POST /data route handle
+const router = express.Router();
+
 router.post('/data', (req, res) => {
   const sensorValue = req.body.sensor_value;
-  console.log(`\nReceived sensor value: ${sensorValue}`);
+  req.io.emit('monitoring', { value: sensorValue })
 
   res.status(200).send({ sensor_value: sensorValue });
 });
