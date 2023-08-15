@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -90,6 +91,7 @@ body{
     padding: 50px 30px;
     /* display: inline-block; */
     border-radius: 10%;
+    margin : 0 auto;
 }
 
 .box_1, .box_2, .box_3 {
@@ -113,14 +115,21 @@ body{
 
 
 
-.trashname{
+.trashname {
     display:flex;
     justify-content: space-evenly;
     text-align: center;
     letter-spacing: 15px;
     width:200px;
     height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 180%);
 }
+
+
+
 
 
 
@@ -154,19 +163,19 @@ button {
             </div>
 
 
+        <div class="monitoring">
             <div class="box_1">
-                <div class="percent">50%</div>
+                <div class="percent"></div>
             </div>
             <div class="box_2">
-                <div class="percent">75%</div>
+                <div class="percent"></div>
             </div>
             <div class="box_3">
-                <div class="percent">30%</div>
+                <div class="percent"></div>
             </div>
             
-            
 
-            <div class="trashname" style="position: relative">
+            <div class="trashname">
                 <span>A</span>
                 <span>B</span>
                 <span>C</span>
@@ -212,30 +221,30 @@ window.location.href = "plogging.html";
 </script>
 
 <script>
-function getRandomPercent() {
-    return Math.floor(Math.random() * 100) + 1;
-}
-
-function adjustBoxHeight() {
-    const boxes = document.querySelectorAll(".box_1, .box_2, .box_3");
-
-    boxes.forEach(function(box) {
-        const percentElement = box.querySelector(".percent");
-        const randomPercent = getRandomPercent();
-        percentElement.textContent = randomPercent + "%"; // Display random percentage
-        const percentValue = randomPercent;
-        const maxHeight = 200; // Maximum height desired
-        const minHeight = 50;  // Minimum height desired
-
-        const calculatedHeight = (percentValue / 100) * (maxHeight - minHeight) + minHeight;
-        box.style.height = calculatedHeight + "px";
+    function getRandomPercent() {
+        return Math.floor(Math.random() * 100) + 1;
+    }
+    
+    function adjustBoxHeight() {
+        const boxes = document.querySelectorAll(".box_1, .box_2, .box_3");
+    
+        boxes.forEach(function(box) {
+            const percentElement = box.querySelector(".percent");
+            const randomPercent = getRandomPercent();
+            percentElement.textContent = randomPercent + "%"; // Display random percentage
+            const percentValue = randomPercent;
+            const maxHeight = 200; // Maximum height desired
+            const minHeight = 50;  // Minimum height desired
+    
+            const calculatedHeight = (percentValue / 100) * (maxHeight - minHeight) + minHeight;
+            box.style.height = calculatedHeight + "px";
+        });
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        adjustBoxHeight();
     });
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    adjustBoxHeight();
-});
-</script>
+    </script>
 
 
 
