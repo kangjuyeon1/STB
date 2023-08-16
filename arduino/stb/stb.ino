@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
 #include "HX711.h"
@@ -9,12 +10,17 @@
 #define HX711_CLK 4
 #define HX711_DOUT 5
 
+#define GM65_RX 6
+#define GM65_TX 7
+
 #define SERVO_PIN 8
 
 #define ULTRASONIC_ECHO 9
 #define ULTRASONIC_TRIG 10
 #define THRESHOLD 10
 
+
+SoftwareSerial GM65(GM65_RX, GM65_TX); // RX, TX
 SoftwareSerial mySerial(ESP8266_RX, ESP8266_TX); // RX, TX ESP8266
 
 HX711 scale(HX711_DOUT, HX711_CLK); //amp pin declaration
@@ -24,8 +30,8 @@ unsigned long lastMillis;
 Servo myservo;
 
 // variables declarations for connection to server
-String ipAddress = "10.10.180.171";
-int portNumber = 80;
+String ipAddress = "10.10.180.218";
+int portNumber = 8080;
 String ssid = "JTI-3.11";
 String password = "";
 
@@ -37,6 +43,7 @@ void detectPerson();
 void setup() {
   Serial.begin(9600);
   mySerial.begin(9600);
+  GM65.begin(9600); //GM65-아두이노간 통신
 
   pinMode(ULTRASONIC_TRIG, OUTPUT);
   pinMode(ULTRASONIC_ECHO, INPUT);
@@ -55,7 +62,32 @@ void setup() {
 }
 
 void loop() {
-  detectPerson();
+  // put your main code here, to run repeatedly:
+  unsigned long startTime = millis();
+  unsigned long timeout = 5000; // Set the timeout to 5 seconds
+  while (millis() - startTime < timeout) {
+    gm65_func();
+    detectPerson();
+  }
+  weight_func();
+}
+
+void gm65_func(){
+  GM65.listen();
+  if(GM65.available()){
+    //GM65에서 아두이노로 날라오는 값이 존재한다면~
+    String barcode = GM65.readStringUntil('\n');
+
+    Serial.println(barcode);
+    for (int i = 0 ; i < 2 ; i++){
+      sendQRDataToServer(barcode);
+    }
+    //Serial.print((char)GM65.read());
+  }
+}
+
+void weight_func(){
+  // // Send data to the server
 
   float weightSensorValue = scale.get_units() / 220.462;
 
@@ -64,8 +96,9 @@ void loop() {
   Serial.print(" point"); //1point per 10gram 
   Serial.println();
 
-  // // Send data to the server
-  // sendDataToServer(String(weightSensorValue));
+
+  mySerial.listen();
+  sendDataToServer(String(weightSensorValue));
 }
 
 // Function to send a command and wait for the expected response
@@ -100,7 +133,7 @@ void sendCommandAndWaitForResponse(String command, String expectedResponse) {
 
 // Function to send data to the Flask server
 void sendDataToServer(String data) {
-  String httpRequest = "POST /data HTTP/1.1\r\n";
+  String httpRequest = "POST /weight/data HTTP/1.1\r\n";
   httpRequest += "Host: " + ipAddress + "\r\n";
   httpRequest += "Content-Type: application/x-www-form-urlencoded\r\n";
   httpRequest += "Content-Length: ";
@@ -108,6 +141,27 @@ void sendDataToServer(String data) {
   httpRequest += "\r\n\r\n";
   httpRequest += "sensor_value=";
   httpRequest += data;
+  httpRequest += "\r\n\r\n";
+
+  // AT+CIPSEND=<length of httpRequest>
+  sendCommandAndWaitForResponse("AT+CIPSEND=" + String(httpRequest.length()), "");
+  // Send HTTP request
+  sendCommandAndWaitForResponse(httpRequest + "\n", "SEND OK");
+  // ESP Response: AT+CIPSTART="TCP","222.104.209.55",80
+  sendCommandAndWaitForResponse("AT+CIPSTART=\"TCP\",\"" + ipAddress + "\"," + String(portNumber), "");
+}
+
+
+// Function to send data to the Flask server
+void sendQRDataToServer(String qrdata) {
+  String httpRequest = "POST /api/qr HTTP/1.1\r\n";
+  httpRequest += "Host: " + ipAddress + "\r\n";
+  httpRequest += "Content-Type: application/x-www-form-urlencoded\r\n";
+  httpRequest += "Content-Length: ";
+  httpRequest += qrdata.length() + 13;
+  httpRequest += "\r\n\r\n";
+  httpRequest += "qr_value=";
+  httpRequest += qrdata;
   httpRequest += "\r\n\r\n";
 
   // AT+CIPSEND=<length of httpRequest>
@@ -141,7 +195,6 @@ void detectPerson() {
     lastMillis = millis();
     Serial.println("true"+String(lastMillis));
   }
-
 
   if ((distance == -1) && (millis() - lastMillis >= 10000)) { //if it takes more than 10s
     Serial.println("*******");
