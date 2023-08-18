@@ -10,8 +10,18 @@ router.get('/monitoring', function(req, res, next) {
   res.render('monitoring');
 });
 
+router.get('/plogging', function(req, res, next) {
+  res.render('plogging');
+});
+
 router.get('/checkapi', function(req, res, next) {
-  res.json({ user: 'tj' });
+  req.io.emit('plogging', { value: 'aku sayang pak hendra' })
+
+  res.json({ user: 'checkget' });
+});
+
+router.post('/checkapi', function(req, res, next) {
+  res.status(200).send({ value: req.body });
 });
 
 module.exports = router;

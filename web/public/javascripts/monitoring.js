@@ -4,6 +4,10 @@ socket.on("monitoring", (v) => {
   adjustSpecificBoxHeight(".box_1", v.value)
 });
 
+socket.on("plogging", (v) => {
+  console.log("plogging: " + v.value)
+});
+
 function updateTime() {
   const now = new Date();
   const dateElement = document.querySelector(".date");
