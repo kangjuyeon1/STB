@@ -38,6 +38,9 @@ dependencies:
   socket.io:
     specifier: ^4.7.2
     version: 4.7.2
+  wretch:
+    specifier: ^2.6.0
+    version: 2.6.0
 
 packages:
 
@@ -1968,6 +1971,11 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /wretch@2.6.0:
+    resolution: {integrity: sha512-7A4TFHSX+cpxxO6Hd4f0ZE9f8wAgO9wRqX3JeOAtHlJy+kdYP+oPjkF1LYmnTSiTMhODR2YWOdMEc4hCCXEw2w==}
+    engines: {node: '>=14'}
+    dev: false
 
   /ws@8.11.0:
     resolution: {integrity: sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==}
