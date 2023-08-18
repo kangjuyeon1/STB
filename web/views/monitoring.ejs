@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>monitoring</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
     <script src="/socket.io/socket.io.js"></script>
-    <script src="javascripts/monitoring.js" defer></script> 
+    <script src="javascripts/monitoring.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -18,28 +20,38 @@
                  </div>
             </div>
 
-        <div class="monitoring">
-                <!-- TODO: REALTIME SOCKET -->
-            <div class="box_1">
-                <div class="percent"></div>
-            </div>
-            <div class="box_2">
-                <div class="percent"></div>
-            </div>
-            <div class="box_3">
-                <div class="percent"></div>
-            </div>
-            
-            <div class="trashname">
-                <span>A</span>
-                <span>B</span>
-                <span>C</span>
-            </div>
-        </div>
-
-        <button type="button" class="btn btn-primary" onclick="navigateToPlogging() "ontouchend="navigateToPlogging()"start style="font-size: 30px;">Start</button>
-
+            <div class="monitoring">
+                <div class="flex-container">
+                    <div class="background_box background_box_1">
+                        <div class="box_1">
+                            <div class="percent"></div>
+                        </div>
+                    </div>
+                    <div class="text-below">A</div>
+                </div>
+                <div class="flex-container">
+                    <div class="background_box background_box_2">
+                        <div class="box_2">
+                            <div class="percent"></div>
+                        </div>
+                    </div>
+                    <div class="text-below">B</div>
+                </div>
+                <div class="flex-container">
+                    <div class="background_box background_box_3">
+                        <div class="box_3">
+                            <div class="percent"></div>
+                        </div>
+                    </div>
+                    <div class="text-below">C</div>
+                </div>
+            </div>              
+        <!-- <button type="button" class="btn btn-primary" onclick="navigateToPlogging() "ontouchend="navigateToPlogging()"start style="font-size: 30px;">Start</button> -->
     </div>
-
+    <nav>
+        <a href="monitoring">monitoring</a>
+        <a href="plogging">plogging</a>
+        <a href="ranking">ranking</a>
+    </nav>               
 </body>
 </html>

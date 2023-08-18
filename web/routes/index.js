@@ -6,12 +6,43 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// router.get('/monitoring', function(req, res, next) {
+//   res.render('monitoring');
+// });
+
 router.get('/monitoring', function(req, res, next) {
-  res.render('monitoring');
+  res.render('monitoring', { activePage: 'monitoring' });
 });
+
+
+router.get('/QR', function(req, res, next) {
+  res.render('QR');
+});
+
+router.get('/plogging', function(req, res, next) {
+  res.render('plogging');
+});
+
+router.get('/dispose', function(req, res, next) {
+  res.render('dispose');
+});
+
+router.get('/weight', function(req, res, next) {
+  res.render('weight');
+});
+
+router.get('/ranking', function(req, res, next) {
+  res.render('ranking');
+});
+
 
 router.get('/checkapi', function(req, res, next) {
   res.json({ user: 'tj' });
 });
+
+// app.get('/monitoring', (req, res) => {
+//   res.render('monitoring', { title: 'Monitoring Page' });
+// });
+
 
 module.exports = router;

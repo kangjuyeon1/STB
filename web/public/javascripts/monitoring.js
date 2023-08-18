@@ -69,3 +69,4 @@ function adjustSpecificBoxHeight(name, percentage) {
 document.addEventListener("DOMContentLoaded", function() {
   adjustBoxHeight();
 });
+
