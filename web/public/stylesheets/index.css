@@ -76,7 +76,7 @@ body{
 }
 
 .lid img {
-    animation: moveLid 1.5s  ease;
+    animation: moveLid  1s  1.5s  ease;
 }
 
 
@@ -94,5 +94,5 @@ body{
 }
 
 .logo {
-    animation: movelogo 1.2s ease-out;
+    animation: movelogo 1.2s 1.2s ease-out;
 }
