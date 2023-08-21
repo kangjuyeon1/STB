@@ -5,23 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-      crossorigin="anonymous"
-    />
+    <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="stylesheets/QR.css" />
+    <script defer>
+      function navigateToRanking() {
+        // 다른 페이지로 이동합니다.
+        window.location.href = "dispose";
+      }
+      new QRCode(document.getElementById("qrcode"), "wkwkwk");
+    </script>
   </head>
   <body>
     <div class="container">
-      <div
-        class="logo"
-        onclick="navigateToRanking() "
-        ontouchend="navigateToRanking()"
-      >
+      <div class="logo">
         <p class="text">My QR</p>
-        <article class="qr"></article>
+        <div class="qrcode"></div>
       </div>
     </div>
     <nav>
@@ -29,12 +27,45 @@
       <a href="plogging">plogging</a>
       <a href="ranking">ranking</a>
     </nav>
-
-    <script>
-      function navigateToRanking() {
-        // 다른 페이지로 이동합니다.
-        window.location.href = "dispose";
-      }
-    </script>
   </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script defer>
+
+      var socket = io();
+      socket.on("monitoring", (v) => {
+        saveInitialWeight(v.value)
+        console.log(`hehe ${v.value}`)
+      });
+
+      socket.on("checkQr", (v) => {
+        if(v.value) {
+          saveQRCode(v.qrcode)
+          alert("QR Code Verified!")
+          window.location.href = "dispose"
+        }
+
+        console.log(v.value + ` and ${v.qrcode}`)
+        console.log(`localstorage ${localStorage.getItem('initialWeight')} and ${localStorage.getItem('qrcode')}`)
+      });
+
+      const qrcodeDiv = document.querySelector(".qrcode")
+      console.log(qrcodeDiv)
+        new QRCode(qrcodeDiv, {
+        text: "love myself",
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H, });
+
+      function saveInitialWeight(weight) {
+        localStorage.setItem('initialWeight', weight)
+      }
+
+      function saveQRCode(qrcode) {
+        localStorage.setItem('qrcode', qrcode)
+      }
+
+
+    </script>
 </html>

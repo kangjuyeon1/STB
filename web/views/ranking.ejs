@@ -11,6 +11,9 @@
     <div class="container">
         <div class="logo">Ranking
                 <article class="ranking">
+                    <% for (let i = 0; i < sortedUsers.length; i++) { %>
+                        <li> <%= sortedUsers[i].name %> </li>
+                    <% } %>
                 </article>
             </div>
         </div>

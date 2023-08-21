@@ -36,12 +36,7 @@
         <img src="img/image_8.svg" />
       </div>
 
-      <button
-        type="button"
-        class="finish"
-        onclick="navigateToQR() "
-        ontouchend="navigateToPlogging()"
-      >
+      <button type="button" class="finish" >
         finish
       </button>
     </div>
@@ -52,13 +47,24 @@
       <a href="ranking">ranking</a>
     </nav>
 
-    <script>
+    <script defer>
       const closeButton = document.querySelector(".closeButton");
       const overlay = document.querySelector(".overlay");
       const guidelineContainer = document.querySelector(".guidelineContainer");
 
       closeButton.addEventListener("click", closeGuideline);
       closeButton.addEventListener("touched", closeGuideline);
+
+      const buttonAction = document.querySelector('.finish')
+      buttonAction.addEventListener('click', (e) => {
+
+        // do you wanna really wanna finish this?
+        let isTrue = confirm("Are you sure?")
+        if(isTrue) {
+          window.location.href = 'qr'
+          console.log(localStorage.getItem('currentWeight'))
+        }
+      })
 
       function closeGuideline() {
         guidelineContainer.style.animation = "slidedown 1s ease-out";
@@ -123,10 +129,7 @@
 
       setInitialPositions();
 
-      function navigateToQR() {
-        // 다른 페이지로 이동합니다.
-        window.location.href = "QR";
-      }
+      // 다른 페이지로 이동합니다. ??? :)
     </script>
   </body>
 </html>

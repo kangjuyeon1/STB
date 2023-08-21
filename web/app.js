@@ -5,10 +5,42 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var app = express();
+// Set up mongoose connection
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const url = "mongodb://127.0.0.1:27017/stb";
+mongoose.connect(url, { useNewUrlParser: true })
+const db = mongoose.connection
+
+db.once('open', _ => {
+  console.log('Database connected:', url)
+})
+
+db.on('error', err => {
+  console.error('connection error:', err)
+})
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect(url);
+}
+
 const socketIo = require("socket.io");
 
 const server = require('http').createServer(app);
 const io = socketIo(server, { cors: { origin: "*" } });
+
+let latestSocketData = null;
+
+io.on('connection', (socket) => {
+    socket.on('data', (data) => {
+        latestSocketData = data; // Store the latest data
+    });
+    socket.on('getLatestData', () => {
+        socket.emit('latestData', latestSocketData);
+    });
+});
 
 app.use((req, res, next) => {
   req.io = io;
@@ -18,7 +50,7 @@ app.use((req, res, next) => {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var weightRouter = require('./routes/weight');
-var apiRouter = require('./routes/trash_api');
+var apiRouter = require('./routes/api');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +58,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

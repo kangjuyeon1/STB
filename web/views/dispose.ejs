@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dispose</title>
     <link rel="stylesheet" href="stylesheets/dispose.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -19,12 +21,7 @@
         <img src="img/image_8.svg" />
       </div>
 
-      <button
-        type="button"
-        class="finish"
-        onclick="navigateToRanking() "
-        ontouchend="navigateToRanking()"
-      >
+      <button type="submit" class="finish">
         finish
       </button>
     </div>
@@ -36,6 +33,43 @@
     </nav>
 
     <script>
+      var socket = io();
+      socket.on("monitoring", (v) => {
+        localStorage.setItem('currentWeight', v.value)
+      });
+
+      // this is just to separate codes from my eyes
+      const buttonAction = document.querySelector('.finish')
+      buttonAction.addEventListener('click', (e) => {
+
+        // do you wanna really wanna finish this?
+        let isTrue = confirm("Are you sure?")
+        if(isTrue) {
+          saveToDatabase()
+          console.log(localStorage.getItem('currentWeight'))
+        }
+      })
+
+      function saveToDatabase() {
+        const currentWeight = localStorage.getItem('currentWeight')
+        const initialWeight = localStorage.getItem('initialWeight')
+        const qrCodeId = localStorage.getItem('qrcode')
+
+        axios.post('/api/dispose', {
+          currentWeight: currentWeight,
+          initialWeight: initialWeight,
+          qrcode: qrCodeId,
+        })
+        .then(function (response) {
+          window.location.href = 'weight'
+          localStorage.setItem('userData', JSON.stringify(response.data))
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      }
+
       function setInitialPositions() {
         const images = document.querySelectorAll(".imgs img");
         const radius = 150;

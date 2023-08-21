@@ -1,4 +1,5 @@
 var express = require('express');
+const Users = require('../models/Users');
 var router = express.Router();
 
 /* GET home page. */
@@ -30,24 +31,15 @@ router.get('/weight', function(req, res, next) {
   res.render('weight');
 });
 
-router.get('/ranking', function(req, res, next) {
-  res.render('ranking');
+router.get('/ranking', async function(req, res, next) {
+  let sortedUsers = await Users.find()
+    .sort({ weight: -1 }) // 1 for ascending order, -1 for descending order
+    .exec();
+  res.render('ranking', { sortedUsers: sortedUsers});
 });
 
-
-router.get('/checkapi', function(req, res, next) {
-  req.io.emit('plogging', { value: 'aku sayang pak hendra' })
-
-  res.json({ user: 'checkget' });
+router.get('/checkApi', function(req, res, next) {
+  res.json({ "lol": "ok" });
 });
-
-router.post('/checkapi', function(req, res, next) {
-  res.status(200).send({ value: req.body });
-});
-
-// app.get('/monitoring', (req, res) => {
-//   res.render('monitoring', { title: 'Monitoring Page' });
-// });
-
 
 module.exports = router;
