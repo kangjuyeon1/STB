@@ -1,122 +1,132 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>plogging</title>
- <link rel = "stylesheet" href="stylesheets/plogging.css">
- <script src="javascripts/plogging.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plogging</title>
+    <link rel="stylesheet" href="stylesheets/plogging.css" />
+    <script src="javascripts/plogging.js"></script>
+  </head>
+  <body>
+    <div class="overlay">
+      <div class="guidelineContainer">
+        <div class="closeButton"></div>
+        <p>
+          1. Bring gloves and gear to pick up trash safely and hygienically.<br /><br />
+          2. Do not directly touch dangerous objects or hazardous waste, and
+          notify the management agency. <br /><br />
+          3. Do not randomly throw away the garbage you find during flogging,
+          but organize it in the designated trash can.
+        </p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="cloud">
+        <p class="timecount"></p>
+      </div>
 
-</head>
-<body>
- <div class="overlay">
- <div class="guidelineContainer">
- <div class="closeButton">
- 
- </div>
- <p>
- 1. Bring gloves and gear to pick up trash safely and hygienically.<br><br>
- 2. Do not directly touch dangerous objects or hazardous waste, and notify the management agency. <br><br>
- 3. Do not randomly throw away the garbage you find during flogging, but organize it in the designated trash can.</p>
- </div>
- </div>
- <div class="container">
-   <div class = "cloud">
-           <p class="timecount"></p>
- </div>
+      <div class="plogging_logo">plogging</div>
 
- <div class="plogging_logo">plogging
- </div>
+      <div class="imgs">
+        <img src="img/image_4.svg" />
+        <img src="img/image_5.svg" />
+        <img src="img/image_6.svg" />
+        <img src="img/image_7.svg" />
+        <img src="img/image_8.svg" />
+      </div>
 
- <div class = "imgs">
-   <img src = "img/image_4.svg">
-   <img src = "img/image_5.svg">
-   <img src = "img/image_6.svg">
-   <img src = "img/image_7.svg">
-   <img src = "img/image_8.svg">
- </div>
+      <button
+        type="button"
+        class="finish"
+        onclick="navigateToQR() "
+        ontouchend="navigateToPlogging()"
+      >
+        finish
+      </button>
+    </div>
 
- <button type = "button" class = "finish" onclick="navigateToQR() "ontouchend="navigateToPlogging()">finish</button>
- </div>
+    <nav>
+      <a href="monitoring">monitoring</a>
+      <a href="plogging">plogging</a>
+      <a href="ranking">ranking</a>
+    </nav>
 
- <nav>
-   <a href="monitoring">monitoring</a>
-   <a href="plogging">plogging</a>
-   <a href="ranking">ranking</a>
-</nav>   
+    <script>
+      const closeButton = document.querySelector(".closeButton");
+      const overlay = document.querySelector(".overlay");
+      const guidelineContainer = document.querySelector(".guidelineContainer");
 
- <script>
-    const closeButton = document.querySelector(".closeButton");
-    const overlay = document.querySelector(".overlay");
-    const guidelineContainer = document.querySelector(".guidelineContainer");
-    
-    closeButton.addEventListener("click", closeGuideline);
-    closeButton.addEventListener("touched", closeGuideline);
-    
-    function closeGuideline() {
-    guidelineContainer.style.animation = "slidedown 1s ease-out";
-    guidelineContainer.addEventListener("animationend", () => {
-    guidelineContainer.style.display = "none";
-    });
-    
-    overlay.style.animation = "fadeout 1s";
-    overlay.addEventListener("animationend", () => {
-    overlay.style.display = "none";
-    });
-    
-    }
-    
-    
-    
-    
-    let totalSeconds = 0;
-    const timecountElement = document.querySelector(".timecount");
-    
-    function updateTime() {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    timecountElement.textContent = formattedTime;
-    totalSeconds++;
-    }
-    
-    // 매 초마다 시간을 갱신합니다.
-    setInterval(updateTime, 1000);
-    
-    function setInitialPositions() {
-    const images = document.querySelectorAll(".imgs img");
-    const radius = 145;
-    const numImages = images.length;
-    const angleIncrement = (360 / numImages) * (Math.PI / 180);
-    let currentAngle = 0;
-    
-    for (let i = 0; i < numImages; i++) {
-    const angle = currentAngle + i * angleIncrement;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
-    
-    images[i].style.transform = `translate(${x}px, ${y}px)`;
-    }
-    
-    setInterval(() => {
-    currentAngle += 0.01; // 조절 가능한 값으로, 숫자를 늘리면 더 빠른 회전이 가능합니다.
-    for (let i = 0; i < numImages; i++) {
-    const angle = currentAngle + i * angleIncrement;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
-    images[i].style.transform = `translate(${x}px, ${y}px)`;
-    }
-    }, 16); // 16ms 간격으로 업데이트하여 부드럽게 움직입니다. 
-    }
-    
-    setInitialPositions();
-    
-    function navigateToQR() {
-    // 다른 페이지로 이동합니다.
-    window.location.href = "QR";
-    }
- </script>
-</body>
+      closeButton.addEventListener("click", closeGuideline);
+      closeButton.addEventListener("touched", closeGuideline);
+
+      function closeGuideline() {
+        guidelineContainer.style.animation = "slidedown 1s ease-out";
+        guidelineContainer.addEventListener("animationend", () => {
+          guidelineContainer.style.display = "none";
+        });
+
+        overlay.style.animation = "fadeout 1s";
+        overlay.addEventListener("animationend", () => {
+          overlay.style.display = "none";
+        });
+      }
+
+      function saveTimeCount() {
+        localStorage.setItem("lastTimeCount", totalSeconds);
+      }
+
+      window.addEventListener("beforeunload", saveTimeCount);
+
+      let totalSeconds = 0;
+      const timecountElement = document.querySelector(".timecount");
+
+      function updateTime() {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        const formattedTime = `${String(hours).padStart(2, "0")}:${String(
+          minutes
+        ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        timecountElement.textContent = formattedTime;
+        totalSeconds++;
+      }
+
+      // 매 초마다 시간을 갱신합니다.
+      setInterval(updateTime, 1000);
+
+      function setInitialPositions() {
+        const images = document.querySelectorAll(".imgs img");
+        const radius = 145;
+        const numImages = images.length;
+        const angleIncrement = (360 / numImages) * (Math.PI / 180);
+        let currentAngle = 0;
+
+        for (let i = 0; i < numImages; i++) {
+          const angle = currentAngle + i * angleIncrement;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+
+          images[i].style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        setInterval(() => {
+          currentAngle += 0.01; // 조절 가능한 값으로, 숫자를 늘리면 더 빠른 회전이 가능합니다.
+          for (let i = 0; i < numImages; i++) {
+            const angle = currentAngle + i * angleIncrement;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            images[i].style.transform = `translate(${x}px, ${y}px)`;
+          }
+        }, 16); // 16ms 간격으로 업데이트하여 부드럽게 움직입니다.
+      }
+
+      setInitialPositions();
+
+      function navigateToQR() {
+        // 다른 페이지로 이동합니다.
+        window.location.href = "QR";
+      }
+    </script>
+  </body>
 </html>

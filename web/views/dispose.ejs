@@ -1,70 +1,73 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dispose</title>
-    <link rel = "stylesheet" href = "stylesheets/dispose.css">
-</head>
-<body>
+    <link rel="stylesheet" href="stylesheets/dispose.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="dispose_logo">dispose
-        </div>
+      <div class="dispose_logo">dispose</div>
 
-        <div class = "imgs">
-            <img src = "img/image_4.svg">
-            <img src = "img/image_5.svg">
-            <img src = "img/image_6.svg">
-            <img src = "img/image_7.svg">
-            <img src = "img/image_8.svg">
-        </div>
+      <div class="imgs">
+        <img src="img/image_4.svg" />
+        <img src="img/image_5.svg" />
+        <img src="img/image_6.svg" />
+        <img src="img/image_7.svg" />
+        <img src="img/image_8.svg" />
+      </div>
 
-        <button type = "button" class = "finish" onclick="navigateToRanking() "ontouchend="navigateToRanking()">finish</button>
-  </div>
+      <button
+        type="button"
+        class="finish"
+        onclick="navigateToRanking() "
+        ontouchend="navigateToRanking()"
+      >
+        finish
+      </button>
+    </div>
 
-  <nav>
-    <a href="monitoring">monitoring</a>
-    <a href="plogging">plogging</a>
-    <a href="ranking">ranking</a>
-</nav>    
+    <nav>
+      <a href="monitoring">monitoring</a>
+      <a href="plogging">plogging</a>
+      <a href="ranking">ranking</a>
+    </nav>
 
     <script>
-          function setInitialPositions() {
-            const images = document.querySelectorAll(".imgs img");
-            const radius = 150;
-            const numImages = images.length;
-            const angleIncrement = (360 / numImages) * (Math.PI / 180);
-            let currentAngle = 0;
-          
-            for (let i = 0; i < numImages; i++) {
-              const angle = currentAngle + i * angleIncrement;
-              const x = Math.cos(angle) * radius;
-              const y = Math.sin(angle) * radius;
-          
-              images[i].style.transform = `translate(${x}px, ${y}px)`;
-            }
-          
-            setInterval(() => {
-              currentAngle += 0.01; // 조절 가능한 값으로, 숫자를 늘리면 더 빠른 회전이 가능합니다.
-              for (let i = 0; i < numImages; i++) {
-                const angle = currentAngle + i * angleIncrement;
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                images[i].style.transform = `translate(${x}px, ${y}px)`;
-              }
-            }, 16); // 16ms 간격으로 업데이트하여 부드럽게 움직입니다. 
+      function setInitialPositions() {
+        const images = document.querySelectorAll(".imgs img");
+        const radius = 150;
+        const numImages = images.length;
+        const angleIncrement = (360 / numImages) * (Math.PI / 180);
+        let currentAngle = 0;
 
-          }
-          
-          setInitialPositions();
+        for (let i = 0; i < numImages; i++) {
+          const angle = currentAngle + i * angleIncrement;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
 
-          function navigateToRanking() {
-            // 다른 페이지로 이동합니다.
-            window.location.href = "weight";
+          images[i].style.transform = `translate(${x}px, ${y}px)`;
         }
-    
-    </script>
 
-</body>
+        setInterval(() => {
+          currentAngle += 0.01; // 조절 가능한 값으로, 숫자를 늘리면 더 빠른 회전이 가능합니다.
+          for (let i = 0; i < numImages; i++) {
+            const angle = currentAngle + i * angleIncrement;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            images[i].style.transform = `translate(${x}px, ${y}px)`;
+          }
+        }, 16); // 16ms 간격으로 업데이트하여 부드럽게 움직입니다.
+      }
+
+      setInitialPositions();
+
+      function navigateToRanking() {
+        // 다른 페이지로 이동합니다.
+        window.location.href = "weight";
+      }
+    </script>
+  </body>
 </html>

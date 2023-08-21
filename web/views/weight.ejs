@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>plogging</title>
+ <link rel = "stylesheet" href="stylesheets/weight.css">
+ <link href='https://fonts.googleapis.com/css?family=Inika' rel='stylesheet'>
+</head>
+<body>
+ <div class="overlay">
+ <div class="guidelineContainer">
+      <header>
+        <div class="bin-container">
+            <img src="img/lid.svg">
+            <img src = "img/bin.svg">
+        </div>
+        <h2>Smart Trash Bin</h2>
+      </header>
+
+      <div class="container">
+        <div class="cloud">
+          <p class="last-timecount"><span id="lastTimeCount">00:00:00</span></p>
+      </div>
+         <div class="weight">0.23Kg</div>
+         <div class = "imgs">
+            <img src = "img/image_4.svg">
+            <img src = "img/image_5.svg">
+            <img src = "img/image_6.svg">
+            <img src = "img/image_7.svg">
+            <img src = "img/image_8.svg">
+            </div>
+      </div>
+
+      <footer>
+          <p class="footer-text" id="pointText"> + 0P</p>
+      </footer>
+ </div>
+
+ <nav>
+   <a href="monitoring">monitoring</a>
+   <a href="plogging">plogging</a>
+   <a href="ranking">ranking</a>
+</nav>   
+
+<script>
+  // Ambil nilai time count terakhir dari localStorage
+  const lastTimeCount = localStorage.getItem('lastTimeCount');
+  const lastTimeCountElement = document.getElementById('lastTimeCount');
+  const hours = Math.floor(lastTimeCount / 3600);
+  const minutes = Math.floor((lastTimeCount % 3600) / 60);
+  const seconds = lastTimeCount % 60;
+  const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  lastTimeCountElement.textContent = formattedTime;
+</script>
+ <script>
+    let totalSeconds = 0;
+    const timecountElement = document.querySelector(".timecount");
+    
+    function updateTime() {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    timecountElement.textContent = formattedTime;
+    totalSeconds++;
+    }
+
+    function setInitialPositions() {
+    const images = document.querySelectorAll(".imgs img");
+    const radius = 100;
+    const numImages = images.length;
+    const angleIncrement = (360 / numImages) * (Math.PI / 180);
+    let currentAngle = 0;
+    
+    for (let i = 0; i < numImages; i++) {
+    const angle = currentAngle + i * angleIncrement;
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    
+    images[i].style.transform = `translate(${x}px, ${y}px)`;
+    }
+    
+    setInterval(() => {
+    currentAngle += 0.01; // 조절 가능한 값으로, 숫자를 늘리면 더 빠른 회전이 가능합니다.
+    for (let i = 0; i < numImages; i++) {
+    const angle = currentAngle + i * angleIncrement;
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    images[i].style.transform = `translate(${x}px, ${y}px)`;
+    }
+    }, 16); // 16ms 간격으로 업데이트하여 부드럽게 움직입니다. 
+    }
+    
+    setInitialPositions();
+    
+    function navigateToQR() {
+    // 다른 페이지로 이동합니다.
+    window.location.href = "QR";
+    }
+ </script>
+   <script>
+    // Get the value from the .widget element
+    const weightElement = document.querySelector(".weight");
+    const weightValue = parseFloat(weightElement.textContent);
+
+    // Calculate the points and update the footer
+    const points = weightValue * 10;
+    const pointTextElement = document.getElementById("pointText");
+    pointTextElement.textContent = `+ ${points.toFixed(2)}P`;
+  </script>
+</body>
+</html>

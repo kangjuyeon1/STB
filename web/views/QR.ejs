@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylesheets/QR.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="stylesheets/QR.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="logo" onclick="navigateToRanking() "ontouchend="navigateToRanking()">
-                <p class = "text">My QR</p>
-                <article class="qr">
-                </article>
-        </div>
+      <div
+        class="logo"
+        onclick="navigateToRanking() "
+        ontouchend="navigateToRanking()"
+      >
+        <p class="text">My QR</p>
+        <article class="qr"></article>
+      </div>
     </div>
     <nav>
-        <a href="monitoring">monitoring</a>
-        <a href="plogging">plogging</a>
-        <a href="ranking">ranking</a>
-    </nav> 
-
+      <a href="monitoring">monitoring</a>
+      <a href="plogging">plogging</a>
+      <a href="ranking">ranking</a>
+    </nav>
 
     <script>
-        
-        function navigateToRanking() {
-            // 다른 페이지로 이동합니다.
-            window.location.href = "dispose";
-        }
+      function navigateToRanking() {
+        // 다른 페이지로 이동합니다.
+        window.location.href = "dispose";
+      }
     </script>
-</body>
+  </body>
 </html>
