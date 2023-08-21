@@ -14,7 +14,6 @@ router.get('/monitoring', function(req, res, next) {
   res.render('monitoring', { activePage: 'monitoring' });
 });
 
-
 router.get('/QR', function(req, res, next) {
   res.render('QR');
 });
@@ -37,7 +36,13 @@ router.get('/ranking', function(req, res, next) {
 
 
 router.get('/checkapi', function(req, res, next) {
-  res.json({ user: 'tj' });
+  req.io.emit('plogging', { value: 'aku sayang pak hendra' })
+
+  res.json({ user: 'checkget' });
+});
+
+router.post('/checkapi', function(req, res, next) {
+  res.status(200).send({ value: req.body });
 });
 
 // app.get('/monitoring', (req, res) => {
