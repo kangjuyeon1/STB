@@ -23,26 +23,6 @@ body {
   height: 100vh;
 }
 
-header {
-  display: flex;
-  width: 100vw;
-  background-color: rgba(106, 238, 26, 0.3);
-  border-bottom: 0.1px solid gray;
-}
-
-#plogging {
-  width: 33vw;
-  background-color: rgba(106, 238, 26, 0.9);
-  border-right: 0.5px solid gray;
-  text-align: center;
-}
-
-#QR {
-  width: 33vw;
-  background-color: rgba(106, 238, 26, 0.9);
-  border-right: 0.5px solid gray;
-  text-align: center;
-}
 
 .logo {
   position: absolute;
@@ -59,6 +39,12 @@ header {
   border-radius: 20px;
   padding: 40px 10px;
 }
+
+.qrcode{
+  display: flex;
+  justify-content: center;
+  align-items: center;}
+
 
 article {
   width: 80%;
@@ -81,10 +67,11 @@ button {
 nav {
   position: absolute;
   width: 100vw;
-  height: 50px;
-  top: 50%;
+  height: 40px;
+  line-height: 35px;
+  bottom:0;
   left: 50%;
-  transform: translate(-50%, 385px);
+  transform: translate(-50%);
   display: flex;
   justify-content: space-around;
   background-color: #cfe0fd;

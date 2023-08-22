@@ -16,6 +16,8 @@ body {
   height: 100vh;
 }
 
+
+
 .container {
   position: relative;
   width: 300px;
@@ -136,7 +138,7 @@ body {
   position: absolute;
   display: flex;
   bottom: 0;
-  left: 50%;
+  left: 30%;
 }
 
 button {
@@ -152,10 +154,11 @@ button {
 nav {
   position: absolute;
   width: 100vw;
-  height: 50px;
-  top: 50%;
+  height: 40px;
+  line-height: 35px;
+  bottom:0;
   left: 50%;
-  transform: translate(-50%, 385px);
+  transform: translate(-50%);
   display: flex;
   justify-content: space-around;
   background-color: #cfe0fd;

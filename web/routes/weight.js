@@ -10,4 +10,10 @@ router.post('/data', (req, res) => {
   res.status(200).send({ sensor_value: sensorValue });
 });
 
+router.post('/test', (req, res) => {
+  console.log(req.body)
+
+  res.json({ "lmao": req.body });
+});
+
 module.exports = router;

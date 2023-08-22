@@ -10,13 +10,24 @@
 <body>
     <div class="container">
         <div class="logo">Ranking
-                <article class="ranking">
+            <article class="ranking">
+                <section class = "name">
+                    <ol class="ordered-list">
+                        <% for (let i = 0; i < sortedUsers.length; i++) { %>
+                        <li><%= sortedUsers[i].name %> </li><% } %>
+                    </ol>
+                 </section>
+                <aside class= "kg">
+                    <ol class = "ordered-list_2">
+                    <li>
                     <% for (let i = 0; i < sortedUsers.length; i++) { %>
-                        <li> <%= sortedUsers[i].name %> </li>
+                            <li><%= parseFloat(sortedUsers[i].weight).toFixed(2) %>kg</li>
                     <% } %>
-                </article>
-            </div>
+                    </ol>
+                </aside>
+            </article>
         </div>
+     </div>
         <nav>
             <a href="monitoring">monitoring</a>
             <a href="plogging">plogging</a>
@@ -27,9 +38,4 @@
 </html>
 
 
-<!-- 
-텍스트-> 데이터
-랭킹
 
-내일 12시까지 끝내야함.
--->

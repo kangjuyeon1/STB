@@ -5,10 +5,11 @@ const router = express.Router()
 
 // checking qr
 router.post('/checkQr', async (req, res) => {
+  const reqQr = req.body.qr_value.replace(/[\r\n]/g, '')
   const allUsers = await Users.find()
   const qrcode = allUsers[0]._id.toString()
 
-  if(req.body.qr_value == qrcode) {
+  if(reqQr == qrcode) {
     console.log("this is actually yours!: " + qrcode)
     req.io.emit('checkQr', { value: true, qrcode: qrcode})
     res.status(200).send({ 
