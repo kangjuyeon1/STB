@@ -32,32 +32,11 @@ header {
   border-bottom: 0.1px solid gray;
 }
 
-#plogging {
-  width: 33vw;
-  background-color: rgba(106, 238, 26, 0.9);
-  border-right: 0.5px solid gray;
-  text-align: center;
-}
-
-#QR {
-  width: 33vw;
-  background-color: rgba(106, 238, 26, 0.9);
-  border-right: 0.5px solid gray;
-  text-align: center;
-}
-
-#dispose {
-  width: 34vw;
-  background-color: rgba(106, 238, 26, 0.9);
-  border-right: 0.5px solid gray;
-  text-align: center;
-}
-
 .dispose_logo {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-100px, -150px);
   width: 200px;
   height: 200px;
   padding: auto;
@@ -69,14 +48,17 @@ header {
   color: #5aade5;
   letter-spacing: 1px;
   border-radius: 50%;
+
+
+  
 }
 
 button {
-  position: absolute;
+    position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 400%);
   width: 210px;
+  transform: translate(-100px, 150px);
   height: 70px;
   background-color: #4d78e8;
   border-radius: 30px;
@@ -117,7 +99,7 @@ nav a:nth-child(2) {
   left: 50%;
   width: 200px;
   height: 200px;
-  transform: translate(-20%, -15%);
+  transform: translate(-35px, -80px);
 }
 
 .imgs img {

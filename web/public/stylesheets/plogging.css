@@ -31,7 +31,7 @@ body {
   top: 50%;
   left: 50%;
   border-radius: 30px;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, -10%);
   width: 280px;
   height: 350px;
   background-color: white;
@@ -42,10 +42,10 @@ body {
 
 @keyframes slideup {
   from {
-    transform: translate(-50%, 120%);
+    transform: translate(-50%, 150%);
   }
   to {
-    transform: translate(-50%, -3%);
+    transform: translate(-50%, -10%);
   }
 }
 
@@ -163,7 +163,7 @@ header {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-100px, -150px);
   width: 200px;
   height: 200px;
   padding: auto;
@@ -181,8 +181,8 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 400%);
   width: 210px;
+  transform: translate(-110px, 150px);
   height: 70px;
   background-color: #4d78e8;
   border-radius: 30px;
@@ -198,7 +198,7 @@ button {
   left: 50%;
   width: 200px;
   height: 200px;
-  transform: translate(-20%, -25%);
+  transform: translate(-35px, -80px);
 }
 
 .imgs img {
@@ -208,16 +208,6 @@ button {
   border-radius: 40%;
 }
 
-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 400%);
-  width: 210px;
-  height: 70px;
-  background-color: #4d78e8;
-  border-color: #4d78e8;
-}
 nav {
   position: absolute;
   width: 100vw;
