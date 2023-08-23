@@ -46,6 +46,7 @@ article {
   height: 80%;
   margin: 30px auto;
   background-color: lightgray;
+  border-radius: 20px;
 }
 
 nav {

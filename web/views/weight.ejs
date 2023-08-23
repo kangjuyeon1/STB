@@ -67,16 +67,16 @@
     convertedWeight = Number(totalWeight.toFixed(2))
     console.log(currentWeight)
     console.log(initialWeight)
-    weightElement.textContent = `${convertedWeight}Kg`
+    weightElement.textContent = `${convertedWeight}g`
 
     function calculateWeight(){
     // Get the value from the .widget element
     const weightValue = parseFloat(weightElement.textContent);
 
     // Calculate the points and update the footer
-    const points = weightValue * 10;
+    const points = weightValue ;
     const pointTextElement = document.getElementById("pointText");
-    pointTextElement.textContent = `+ ${points.toFixed(2)}P`;
+    pointTextElement.textContent= `+ ${points}P`;
     }
     // --------------------------------
     calculateWeight()
