@@ -36,6 +36,7 @@ function navigateToPlogging() {
   window.location.href = "plogging.html";
 }
 
+
 function getRandomPercent() {
   return Math.floor(Math.random() * 100) + 1;
 }
@@ -57,11 +58,20 @@ function adjustBoxHeight() {
   });
 }
 
+// Contoh penggunaan
+const sensorValue = 100;
+const resultPercentage = convertToPercentage(sensorValue);
+console.log(`${sensorValue} sensor value is equivalent to ${resultPercentage}%`);
+
+
+
 function adjustSpecificBoxHeight(name, percentage) {
   const box = document.querySelector(name);
+  // anggep percentage itu valuenya ( sensor value )
 
   const percentElement = box.querySelector(".percent");
-  percentElement.textContent = percentage + "%";
+  let value = (percentage / 100) * 10
+  percentElement.textContent = value + "%";
   const percentValue = percentage;
   const maxHeight = 200;
   const minHeight = 50;
